@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 import {
   ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Check, ChevronRight,
   CircleCheck, Compass, Film, Headphones, Library, Search, Sparkles,
@@ -94,6 +95,11 @@ const categories: { name: Category; icon: typeof Library }[] = [
   { name: 'All', icon: Library }, { name: 'Courses', icon: Sparkles }, { name: 'Grammar', icon: BookOpen },
   { name: 'Apps', icon: Smartphone }, { name: 'Books', icon: BookOpen }, { name: 'Watch', icon: Film }, { name: 'Listen', icon: Headphones },
 ];
+
+const resourceLogo = (href: string) => {
+  const domain = new URL(href).hostname.replace(/^www\./, '');
+  return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+};
 
 export default function Home() {
   const [selectedStage, setSelectedStage] = useState(1);
@@ -193,7 +199,10 @@ export default function Home() {
           {filtered.map((resource, index) => (
             <a className="resource-card" href={resource.href} target="_blank" rel="noreferrer" key={resource.title}>
               <div className="resource-meta"><span>{String(index + 1).padStart(2, '0')}</span><span>{resource.category}</span><span className={`price ${resource.price.toLowerCase()}`}>{resource.price}</span></div>
-              <div><h3>{resource.title}</h3>{resource.chinese && <b>{resource.chinese}</b>}</div>
+              <div className="resource-brand">
+                <span className="resource-logo"><Image src={resourceLogo(resource.href)} alt="" width={48} height={48} unoptimized /></span>
+                <div><h3>{resource.title}</h3>{resource.chinese && <b>{resource.chinese}</b>}</div>
+              </div>
               <p>{resource.description}</p>
               <span className="resource-cta">Visit resource <ArrowUpRight size={16} /></span>
             </a>
