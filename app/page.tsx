@@ -90,36 +90,6 @@ const resources: Resource[] = [
   { title: 'Heavenly Path', chinese: '飞升宝典', category: 'Books', level: [1, 2, 3, 4, 5], description: 'The deep reference: extensive guides and ranked native Chinese media.', price: 'Free', href: 'https://heavenlypath.notion.site/heavenlypath/Heavenly-Path-d9be1806465b4525afeb132d1079194c' },
 ];
 
-const featuredResources = [
-  {
-    title: 'HelloChinese',
-    type: 'App · Start here',
-    promise: 'Build the foundation',
-    description: 'A polished guided course for tones, pronunciation, characters, and everyday grammar. The clearest first step for a brand-new learner.',
-    href: 'https://www.hellochinese.cc/',
-    icon: Sparkles,
-    color: '#d9543e',
-  },
-  {
-    title: 'Du Chinese',
-    type: 'App · Read & listen',
-    promise: 'Turn input into a habit',
-    description: 'Level-matched stories, native audio, instant word lookup, and grammar notes—from first readings through advanced Chinese.',
-    href: 'https://duchinese.net/',
-    icon: BookOpen,
-    color: '#4d7769',
-  },
-  {
-    title: 'Hack Chinese',
-    type: 'Web app · Vocabulary',
-    promise: 'Make new words stick',
-    description: 'A focused vocabulary system with intelligent spaced repetition. Use it to retain the words that keep appearing in your immersion.',
-    href: 'https://www.hackchinese.com/',
-    icon: Smartphone,
-    color: '#6d5a86',
-  },
-];
-
 const categories: { name: Category; icon: typeof Library }[] = [
   { name: 'All', icon: Library }, { name: 'Courses', icon: Sparkles }, { name: 'Grammar', icon: BookOpen },
   { name: 'Apps', icon: Smartphone }, { name: 'Books', icon: BookOpen }, { name: 'Watch', icon: Film }, { name: 'Listen', icon: Headphones },
@@ -145,7 +115,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Mandarin Atlas home"><span className="brand-mark">中</span><span>Mandarin Atlas</span></a>
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation"><a href="#path">The path</a><a href="#featured">Featured</a><a href="#library">Library</a></nav>
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation"><a href="#path">The path</a><a href="#library">Library</a><a href="#method">Method</a></nav>
         <Button onClick={goToPath} className="rounded-full bg-ink px-5 text-paper hover:bg-ink/90">Find my level</Button>
       </header>
 
@@ -204,25 +174,6 @@ export default function Home() {
           <article><span>01</span><h3>Learn the frame</h3><p>A little structured grammar and vocabulary gives input somewhere to land.</p></article>
           <article><span>02</span><h3>Meet it in context</h3><p>Read, watch, and listen at the edge of comfort—not far beyond it.</p></article>
           <article><span>03</span><h3>Follow what repeats</h3><p>Save recurring words and patterns. Let rare ones pass without guilt.</p></article>
-        </div>
-      </section>
-
-      <section id="featured" className="featured-shell">
-        <div className="featured-heading">
-          <div><span className="eyebrow"><Sparkles size={14} /> Start with the essentials</span><h2>Three tools worth<br /><em>building around.</em></h2></div>
-          <p>A course, a reading habit, and a vocabulary system. These are the strongest anchors for a simple, sustainable Chinese-learning stack.</p>
-        </div>
-        <div className="featured-grid">
-          {featuredResources.map(({ title, type, promise, description, href, icon: Icon, color }, index) => (
-            <a className="featured-card" href={href} target="_blank" rel="noreferrer" key={title} style={{ '--feature-color': color } as React.CSSProperties}>
-              <div className="featured-card-top"><span>Featured {String(index + 1).padStart(2, '0')}</span><span><Icon size={14} />{type}</span></div>
-              <div className="featured-icon"><Icon size={25} /></div>
-              <span className="featured-promise">{promise}</span>
-              <h3>{title}</h3>
-              <p>{description}</p>
-              <span className="featured-cta">Visit official site <ArrowUpRight size={17} /></span>
-            </a>
-          ))}
         </div>
       </section>
 
