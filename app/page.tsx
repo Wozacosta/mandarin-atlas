@@ -66,12 +66,13 @@ const stages = [
 ];
 
 const resources: Resource[] = [
-  { title: 'HelloChinese', category: 'Courses', level: [0, 1], description: 'A friendly, structured start for pronunciation, characters, and essential grammar.', price: 'Freemium', href: 'https://www.hellochinese.cc/' },
+  { title: 'HelloChinese', category: 'Apps', level: [0, 1], description: 'A friendly, structured start for pronunciation, characters, and essential grammar.', price: 'Freemium', href: 'https://www.hellochinese.cc/' },
   { title: 'Chinese Grammar Wiki', category: 'Grammar', level: [0, 1, 2, 3, 4], description: 'Clear grammar explanations organized from A1 to C1 with practical examples.', price: 'Free', href: 'https://resources.allsetlearning.com/chinese/grammar/' },
   { title: 'Pleco', category: 'Apps', level: [0, 1, 2, 3, 4, 5], description: 'The essential Chinese dictionary, with handwriting, audio, flashcards, and reader add-ons.', price: 'Freemium', href: 'https://www.pleco.com/' },
   { title: 'Little Fox Chinese', category: 'Listen', level: [0, 1], description: 'Illustrated, native-narrated stories with optional subtitles and vocabulary support.', price: 'Free', href: 'https://chinese.littlefox.com/en' },
   { title: 'Mandarin Companion', category: 'Books', level: [0, 1, 2], description: 'Compelling graded novels at 150, 300, and 450-character levels.', price: 'Paid', href: 'https://mandarincompanion.com/' },
-  { title: 'Du Chinese', category: 'Books', level: [0, 1, 2, 3], description: 'Short graded stories with excellent native audio and a smooth popup dictionary.', price: 'Freemium', href: 'https://duchinese.net/' },
+  { title: 'Du Chinese', category: 'Apps', level: [0, 1, 2, 3, 4, 5], description: 'Graded stories for every level with native audio, instant lookup, and grammar support.', price: 'Freemium', href: 'https://duchinese.net/' },
+  { title: 'Hack Chinese', category: 'Apps', level: [0, 1, 2, 3, 4, 5], description: 'A focused web app for learning and retaining Chinese vocabulary with smart spaced repetition.', price: 'Paid', href: 'https://www.hackchinese.com/' },
   { title: 'Mandarin Bean', category: 'Books', level: [0, 1, 2], description: 'HSK-tagged readings with audio, pinyin, traditional characters, and definitions.', price: 'Freemium', href: 'https://mandarinbean.com/' },
   { title: 'WordSwing', category: 'Books', level: [1, 2], description: 'Choose-your-own-adventure stories that make intensive reading feel like play.', price: 'Freemium', href: 'https://wordswing.com/' },
   { title: 'Readibu', category: 'Apps', level: [2, 3, 4, 5], description: 'A webnovel reader with one-tap definitions, text-to-speech, and bookmarks.', price: 'Freemium', href: 'https://www.readibu.com/' },
@@ -87,6 +88,36 @@ const resources: Resource[] = [
   { title: 'Joy of Life', chinese: '庆余年', category: 'Watch', level: [4, 5], description: 'Fast, witty historical fantasy for learners ready for layered dialogue and register shifts.', price: 'Freemium', href: 'https://www.viki.com/tv/36367c-joy-of-life' },
   { title: 'The Three-Body Problem', chinese: '三体', category: 'Books', level: [4, 5], description: 'Ambitious science fiction for advanced readers building technical and literary range.', price: 'Paid', href: 'https://book.douban.com/subject/2567698/' },
   { title: 'Heavenly Path', chinese: '飞升宝典', category: 'Books', level: [1, 2, 3, 4, 5], description: 'The deep reference: extensive guides and ranked native Chinese media.', price: 'Free', href: 'https://heavenlypath.notion.site/heavenlypath/Heavenly-Path-d9be1806465b4525afeb132d1079194c' },
+];
+
+const featuredResources = [
+  {
+    title: 'HelloChinese',
+    type: 'App · Start here',
+    promise: 'Build the foundation',
+    description: 'A polished guided course for tones, pronunciation, characters, and everyday grammar. The clearest first step for a brand-new learner.',
+    href: 'https://www.hellochinese.cc/',
+    icon: Sparkles,
+    color: '#d9543e',
+  },
+  {
+    title: 'Du Chinese',
+    type: 'App · Read & listen',
+    promise: 'Turn input into a habit',
+    description: 'Level-matched stories, native audio, instant word lookup, and grammar notes—from first readings through advanced Chinese.',
+    href: 'https://duchinese.net/',
+    icon: BookOpen,
+    color: '#4d7769',
+  },
+  {
+    title: 'Hack Chinese',
+    type: 'Web app · Vocabulary',
+    promise: 'Make new words stick',
+    description: 'A focused vocabulary system with intelligent spaced repetition. Use it to retain the words that keep appearing in your immersion.',
+    href: 'https://www.hackchinese.com/',
+    icon: Smartphone,
+    color: '#6d5a86',
+  },
 ];
 
 const categories: { name: Category; icon: typeof Library }[] = [
@@ -114,7 +145,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Mandarin Atlas home"><span className="brand-mark">中</span><span>Mandarin Atlas</span></a>
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation"><a href="#path">The path</a><a href="#library">Library</a><a href="#method">Method</a></nav>
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation"><a href="#path">The path</a><a href="#featured">Featured</a><a href="#library">Library</a></nav>
         <Button onClick={goToPath} className="rounded-full bg-ink px-5 text-paper hover:bg-ink/90">Find my level</Button>
       </header>
 
@@ -173,6 +204,25 @@ export default function Home() {
           <article><span>01</span><h3>Learn the frame</h3><p>A little structured grammar and vocabulary gives input somewhere to land.</p></article>
           <article><span>02</span><h3>Meet it in context</h3><p>Read, watch, and listen at the edge of comfort—not far beyond it.</p></article>
           <article><span>03</span><h3>Follow what repeats</h3><p>Save recurring words and patterns. Let rare ones pass without guilt.</p></article>
+        </div>
+      </section>
+
+      <section id="featured" className="featured-shell">
+        <div className="featured-heading">
+          <div><span className="eyebrow"><Sparkles size={14} /> Start with the essentials</span><h2>Three tools worth<br /><em>building around.</em></h2></div>
+          <p>A course, a reading habit, and a vocabulary system. These are the strongest anchors for a simple, sustainable Chinese-learning stack.</p>
+        </div>
+        <div className="featured-grid">
+          {featuredResources.map(({ title, type, promise, description, href, icon: Icon, color }, index) => (
+            <a className="featured-card" href={href} target="_blank" rel="noreferrer" key={title} style={{ '--feature-color': color } as React.CSSProperties}>
+              <div className="featured-card-top"><span>Featured {String(index + 1).padStart(2, '0')}</span><span><Icon size={14} />{type}</span></div>
+              <div className="featured-icon"><Icon size={25} /></div>
+              <span className="featured-promise">{promise}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <span className="featured-cta">Visit official site <ArrowUpRight size={17} /></span>
+            </a>
+          ))}
         </div>
       </section>
 
