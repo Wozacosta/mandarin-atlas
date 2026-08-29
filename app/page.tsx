@@ -4,12 +4,12 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import {
   ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Check, ChevronRight,
-  CircleCheck, Compass, Film, Headphones, Library, Search, Sparkles,
+  CircleCheck, Compass, Film, Globe2, Headphones, Library, Search, Sparkles,
   Smartphone, Volume2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-type Category = 'All' | 'Courses' | 'Grammar' | 'Apps' | 'Books' | 'Watch' | 'Listen';
+type Category = 'All' | 'Courses' | 'Grammar' | 'Apps' | 'Books' | 'Culture' | 'Watch' | 'Listen';
 
 type Resource = {
   title: string;
@@ -71,6 +71,11 @@ const resources: Resource[] = [
   { title: 'Yoyo Chinese', category: 'Courses', level: [0, 1, 2], description: 'A thorough video curriculum with strong pronunciation teaching, dialogues, quizzes, and audio review.', price: 'Freemium', href: 'https://yoyochinese.com/' },
   { title: 'Chinese Zero to Hero', category: 'Courses', level: [0, 1, 2, 3, 4], description: 'Structured HSK courses that turn textbook material into clear video lessons and guided practice.', price: 'Paid', href: 'https://www.chinesezerotohero.com/' },
   { title: 'Hacking Chinese', category: 'Courses', level: [0, 1, 2, 3, 4, 5], description: 'Thoughtful, research-aware guidance on how to improve listening, speaking, reading, writing, and study habits.', price: 'Free', href: 'https://www.hackingchinese.com/' },
+  { title: 'Asia for Educators', category: 'Culture', level: [0, 1, 2, 3, 4, 5], description: 'Columbia’s clear gateway to Chinese geography, timelines, primary sources, and illustrated history modules.', price: 'Free', href: 'https://afe.easia.columbia.edu/' },
+  { title: 'Visual Sourcebook of Chinese Civilization', category: 'Culture', level: [0, 1, 2, 3, 4, 5], description: 'Explore geography, tombs, Buddhism, technology, homes, clothing, and art through substantial visual units.', price: 'Free', href: 'https://depts.washington.edu/chinaciv/' },
+  { title: 'MIT Visualizing Cultures', category: 'Culture', level: [2, 3, 4, 5], description: 'Image-led historical exhibits on early-modern China, the Canton trade, the Opium Wars, and visual memory.', price: 'Free', href: 'https://visualizingcultures.mit.edu/home/index.html' },
+  { title: 'ChinaKnowledge', category: 'Culture', level: [2, 3, 4, 5], description: 'A deep encyclopedia of dynasties, politics, literature, philosophy, religion, and historical terms.', price: 'Free', href: 'http://www.chinaknowledge.de/' },
+  { title: 'China Historical GIS', category: 'Culture', level: [3, 4, 5], description: 'Search historical place names and map how China’s administrative geography changed across dynasties.', price: 'Free', href: 'https://chgis.fas.harvard.edu/' },
   { title: 'Chinese Grammar Wiki', category: 'Grammar', level: [0, 1, 2, 3, 4], description: 'Clear grammar explanations organized from A1 to C1 with practical examples.', price: 'Free', href: 'https://resources.allsetlearning.com/chinese/grammar/' },
   { title: 'Chinese Boost Grammar', category: 'Grammar', level: [0, 1, 2, 3, 4], description: 'A searchable grammar reference organized by CEFR, HSK level, function, and individual words.', price: 'Free', href: 'https://www.chineseboost.com/grammar/' },
   { title: 'Pleco', category: 'Apps', level: [0, 1, 2, 3, 4, 5], description: 'The essential Chinese dictionary, with handwriting, audio, flashcards, and reader add-ons.', price: 'Freemium', href: 'https://www.pleco.com/' },
@@ -90,6 +95,13 @@ const resources: Resource[] = [
   { title: 'TeaTime Chinese', category: 'Listen', level: [2, 3], description: 'Intermediate cultural stories in clear Mandarin with synchronized transcripts, pinyin, and word lookup.', price: 'Freemium', href: 'https://teatimechinese.com/' },
   { title: 'MaoMi Chinese', chinese: '猫咪中文', category: 'Listen', level: [2, 3, 4], description: 'Weekly intermediate Mandarin audio with transcripts, translations, and pinyin for supported listening.', price: 'Freemium', href: 'https://maomichinese.com/' },
   { title: 'ChinesePod', category: 'Listen', level: [0, 1, 2, 3, 4, 5], description: 'A deep archive of bite-sized audio and video lessons, graded from newcomer to advanced.', price: 'Freemium', href: 'https://www.chinesepod.com/' },
+  { title: 'Tingting Comprehensible Chinese', category: 'Watch', level: [0, 1], description: 'Slow, clear, visually supported stories that make Mandarin understandable from the absolute-beginner stage.', price: 'Free', href: 'https://www.youtube.com/@ComprehensibleChinese' },
+  { title: 'Mandarin Click', category: 'Watch', level: [0, 1, 2], description: 'Levelled slow-Chinese stories with strong visual context, characters, pinyin, and optional translations.', price: 'Free', href: 'https://www.youtube.com/c/MandarinClick' },
+  { title: 'Grace Mandarin Chinese', category: 'Watch', level: [0, 1, 2], description: 'Excellent pronunciation, phonetics, grammar, and study guidance with both simplified and traditional characters.', price: 'Free', href: 'https://www.youtube.com/@GraceMandarinChinese' },
+  { title: 'ShuoshuoChinese', chinese: '说说中文', category: 'Watch', level: [0, 1, 2, 3], description: 'Logical, approachable lessons that unpack sentence structure and help learners speak more naturally.', price: 'Free', href: 'https://www.youtube.com/c/ShuoshuoChinese%E8%AF%B4%E8%AF%B4%E4%B8%AD%E6%96%87' },
+  { title: 'Mandarin Corner', category: 'Watch', level: [1, 2, 3, 4], description: 'Long-form street interviews, walks, and conversations with detailed subtitles and real everyday Mandarin.', price: 'Free', href: 'https://www.youtube.com/@MandarinCorner2' },
+  { title: 'Dashu Mandarin', chinese: '大叔中文', category: 'Watch', level: [2, 3, 4, 5], description: 'Natural, subtitled conversations and topical podcasts for learners crossing into advanced listening.', price: 'Free', href: 'https://www.youtube.com/@DashuMandarin' },
+  { title: 'Little Chinese Everywhere', category: 'Watch', level: [1, 2, 3, 4, 5], description: 'Human-geography travel films through lesser-seen regions of China, rich in landscapes and local voices.', price: 'Free', href: 'https://www.youtube.com/@LittleChineseEverywhere' },
   { title: 'Peppa Pig', chinese: '小猪佩奇', category: 'Watch', level: [1, 2], description: 'Short episodes, visual context, and repetitive family vocabulary.', price: 'Free', href: 'https://www.youtube.com/@PeppaPigChineseOfficial' },
   { title: 'Reset', chinese: '开端', category: 'Watch', level: [2, 3], description: 'A gripping time-loop drama with repeated situations and contemporary dialogue.', price: 'Freemium', href: 'https://www.viki.com/tv/38357c-reset' },
   { title: 'Put Your Head on My Shoulder', chinese: '致我们暖暖的小时光', category: 'Watch', level: [2, 3], description: 'A light university romance with everyday settings, recurring vocabulary, and abundant visual context.', price: 'Freemium', href: 'https://www.viki.com/tv/36780c-put' },
@@ -106,7 +118,7 @@ const resources: Resource[] = [
 
 const categories: { name: Category; icon: typeof Library }[] = [
   { name: 'All', icon: Library }, { name: 'Courses', icon: Sparkles }, { name: 'Grammar', icon: BookOpen },
-  { name: 'Apps', icon: Smartphone }, { name: 'Books', icon: BookOpen }, { name: 'Watch', icon: Film }, { name: 'Listen', icon: Headphones },
+  { name: 'Apps', icon: Smartphone }, { name: 'Books', icon: BookOpen }, { name: 'Culture', icon: Globe2 }, { name: 'Watch', icon: Film }, { name: 'Listen', icon: Headphones },
 ];
 
 const resourceLogo = (href: string) => {
