@@ -2,6 +2,8 @@
 
 A clear, chronological map for learning Mandarin Chinese—from first tones to native media. Choose your current stage to see the grammar, habits, apps, books, shows, and listening resources that fit now.
 
+Live site: https://mandarin-atlas.woza.chatgpt.site
+
 ## Local development
 
 ```bash

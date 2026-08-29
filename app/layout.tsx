@@ -6,6 +6,7 @@ const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 const notoSerifSC = Noto_Serif_SC({ variable: '--font-noto-serif-sc', subsets: ['latin'], weight: ['500', '600', '700'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mandarin-atlas.woza.chatgpt.site'),
   title: 'Mandarin Atlas — Your map to fluency',
   description: 'A clear, level-by-level path through Chinese study, books, apps, film, and native media.',
   openGraph: {
