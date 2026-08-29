@@ -2,7 +2,7 @@
 
 A clear, chronological map for learning Mandarin Chinese—from first tones to native media. Choose your current stage to see the grammar, habits, apps, books, shows, and listening resources that fit now.
 
-Live site: https://mandarin-atlas.woza.chatgpt.site
+Live site: https://mandarin-atlas-one.vercel.app
 
 ## Local development
 
@@ -11,4 +11,4 @@ npm install
 npm run dev
 ```
 
-Built with Vinext, React, Tailwind CSS, and shadcn/ui.
+Built with Next.js, React, Tailwind CSS, and shadcn/ui.
